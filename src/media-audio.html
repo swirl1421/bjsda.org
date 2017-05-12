@@ -16,7 +16,7 @@
     <script src="./dcore.js"></script>
     <link href="./font/iconfont.css" rel="stylesheet">
      <link href="./main.css" rel="stylesheet">
-     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>缸瓦市聚会视频</title>
     <style>
 
@@ -97,6 +97,7 @@
                         $.get("http://back.kaffir-lily.cc/media/"+id,{id:id},function(result){
                                 vue.media = result.data;
                                 vue.type = result.data.type;
+                                document.title = result.data.title + " | 缸瓦市教堂";
                     });
                     
                 });
