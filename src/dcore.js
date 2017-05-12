@@ -30,18 +30,18 @@ $(function() {
                     var $html = '<div >';
                     var last_page = $current - 1;
                     if($current>1){
-                        $html += '<button type="button" class="btn btn-warning '+btnsize+'" onclick="' + fun + '(' + last_page + ')" title="上一页"><<</button>';
+                        $html += '<button type="button" class="weui-btn weui-btn_mini weui-btn_default orange" onclick="' + fun + '(' + last_page + ')" title="上一页"><<</button>';
                     }else{
-                        $html += '<button type="button" class="btn btn-default '+btnsize+'" disabled="disabled"><<</button>';
+                        $html += '<button type="button" class="weui-btn weui-btn_mini weui-btn_default " disabled="disabled"><<</button>';
 
                     }
 
                     if ($current >= $page_num) {
-                        $html += ' <button type="button" class="btn btn-default '+btnsize+'" disabled="disabled">>></button>';
+                        $html += ' <button type="button" class="weui-btn weui-btn_mini weui-btn_default " disabled="disabled">>></button>';
 
                     } else {
                         var next_page = $current + 1;
-                        $html += ' <button type="button" class="btn btn-warning '+btnsize+'" onclick="' + fun + '(' + next_page + ')' + '" title="下一页">>></button>';
+                        $html += ' <button type="button" class="weui-btn weui-btn_mini weui-btn_default orange" onclick="' + fun + '(' + next_page + ')' + '" title="下一页">>></button>';
                     }
                     $html += '<span style="margin-left:1em;" class="text-info"><small>共'+page_num+'页 ,当前第'+$current+'页</small></span>';
                     $html += '</div>';
