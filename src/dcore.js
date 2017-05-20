@@ -1,5 +1,5 @@
 var D = {}
-$(function() {
+
                 D.getQueryString = function(name) {
                     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
                     var r = window.location.search.substr(1).match(reg);
@@ -367,7 +367,7 @@ $(function() {
                 }
                 return true;
             }
-        });
+       
         
         Vue.filter('date', function (value) {
   if(!$.isNumeric(value))return '';
