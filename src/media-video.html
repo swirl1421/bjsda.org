@@ -61,7 +61,10 @@
     <source src="http://bjsda.oss-cn-beijing.aliyuncs.com/1495294012fe936606753e52959e273a16c1f85182.mp4" type="video/mp4">
     您的浏览器不支持 video 标签。
 </video>-->
-    <vue-video></vue-video>
+    <div class="col-md-12 text-center">
+         <vue-video></vue-video>
+    </div>
+   
             <a class="weui-cell " href="javascript:;" style="height:90px;">
                 <div class="weui-cell__hd"></div>
                 <div class="weui-cell__bd">
@@ -74,7 +77,7 @@
             </a>
           
         </div>
-         <div class="col-md-12" style="margin-top:20px;padding-bottom:10px;background-color:#fff;">
+         <div class="col-md-12 " style="margin-top:20px;padding-bottom:10px;background-color:#fff;">
            <p>
                {{media.remark}}
            </p>
@@ -122,7 +125,7 @@
                     });
                     
                 Vue.component('vue-video', {
-                    template: '<video width="320" height="240" controls>'+
+                    template: '<video style="margin:auto;" controls>'+
                 '<source :src="url" type="video/mp4">'+
                 '您的浏览器不支持 video 标签。'+
             +'</video>',
