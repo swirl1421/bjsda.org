@@ -77,7 +77,7 @@
                         is_android:true,
                     },
                     updated:function(){
-                        
+                        $( 'audio' ).audioPlayer(); 
                     }
                 });
 
@@ -99,7 +99,7 @@
                                 vue.media = result.data;
                                 vue.type = result.data.type;
                                 document.title = result.data.title + " | 缸瓦市教堂";
-                                $( 'audio' ).audioPlayer(); 
+                                
                     });
                     
                 });
