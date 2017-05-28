@@ -381,3 +381,20 @@ Vue.filter('date_year', function (value) {
 
   return date;
 });
+
+Vue.component('vue-navbar', {
+                    template: '<nav class="navbar navbar-default navbar-fixed-top" role="navigation">'+
+        
+    '<div class="container-fluid">'+
+    '<div class="navbar-header">'+
+        '<a class="navbar-brand" href="media.html">主页</a>'+
+          '<p class="navbar-text">缸瓦市教堂的证道记录</p>'+
+    '</div>'+
+    '</div>'+
+'</nav>',
+                    // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
+                    // 但是我们返回给每个组件的实例的却引用了同一个data对象
+                    data: function () {
+                        return {}
+                    }
+                    })

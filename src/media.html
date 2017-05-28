@@ -22,17 +22,19 @@
     </style>
 </head>
 <body >
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div id="vue">
+    <!--<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-tree-deciduous"></i> 主页</a>
+        <a class="navbar-brand" href="#">主页</a>
           <p class="navbar-text">缸瓦市教堂的证道记录</p>
     </div>
     </div>
-</nav>
+</nav>-->
+<vue-navbar></vue-navbar>
     
-    <div id="vue" class="content" style="">
+    <div  class="content" style="">
     <div id="big" style="margin:0px 5px 100px 5px;">
         <!--<div class="page__hd" style="margin-bottom:10px;">
         <h1 class="page__title">
@@ -51,8 +53,20 @@
     </div>
         <div class="weui-cells">
 
+            <a class="weui-cell weui-cell_access" href="article.html?id=1">
+                <div class="weui-cell__bd">
+                    
+                    <p>证道资源下载(百度云)</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                </div>
+            </a>
+
             <a class="weui-cell weui-cell_access" v-bind:href="'media-'+type_text+'.html?id='+media.id" style="" v-for="media in list">
-                <div class="weui-cell__hd"><img src="./images/church.png" alt="" style="width:50px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__hd">
+                    <img src="http://bjsda.oss-cn-beijing.aliyuncs.com/church.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" 
+                    alt="" style="width:50px;margin-right:5px;display:block"></div>
                 <div class="weui-cell__bd">
                     <p>{{ media.title }}-{{ media.speaker }}</p>
                 </div>
@@ -64,6 +78,8 @@
 
         </div>
     </div>
+
+            </div>
 
             </div>
             <script>
