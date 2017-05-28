@@ -86,12 +86,15 @@
 /*
 文章
 */
-
+.content-position{
+    max-width: 800px;
+    margin: 30px auto 30px auto;
+}
  .text{
 
-            max-width: 800px;
-            padding: 10px 80px;
-            margin: 30px auto 30px auto;
+            
+            padding: 10px 5%;
+            margin: 30px 2% 30px 2%;
             border-radius: 3px;
             box-shadow: 0 0 0 0,0 6px 12px rgba(0,0,0,0.1);
             font-family: "Lato",Calibri,Arial,sans-serif;
