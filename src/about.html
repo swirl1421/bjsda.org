@@ -44,30 +44,25 @@
         <p class="page__desc">缸瓦市教堂的证道视频和音频记录</p>
     </div>-->
     <div class="weui-flex media_tab">
-        <div class="weui-flex__item">
-            <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn active" media-type="1"><i class="iconfont icon-yinpin"></i> 音频</a>
-            </div>
-        <div class="weui-flex__item">
-            <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn" media-type="2">  <i class="iconfont icon-shipin"></i> 视频</a>
-            </div>
+       
         
     </div>
         <div class="weui-cells">
 
-            <a class="" href="article.html?id=1">
-                
-                 <div class="well well-sm">证道资源下载(百度云)</div>
-               
-            </a>
+           <div class="panel panel-warning">
+    <div class="panel-heading">
+        <h3 class="panel-title">关于本堂</h3>
+    </div>
+   
+</div>
 
-            <a class="weui-cell weui-cell_access" v-bind:href="'media-'+type_text+'.html?id='+media.id" style="" v-for="media in list">
+            <a class="weui-cell weui-cell_access" v-bind:href="'article.html?id='+article.id" style="" v-for="article in list">
                 <div class="weui-cell__hd">
-                    <img src="http://bjsda.oss-cn-beijing.aliyuncs.com/church.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" 
-                    alt="" style="width:50px;margin-right:5px;display:block"></div>
+                    </div>
                 <div class="weui-cell__bd">
-                    <p>{{ media.title }}-{{ media.speaker }}</p>
+                    <p>{{ article.title }}</p>
                 </div>
-                <div class="weui-cell__ft">{{ media.make_time | date_year }}</div>
+                <div class="weui-cell__ft">{{ article.create_time | date_year }}</div>
             </a>
           
         </div>
@@ -90,17 +85,7 @@
                     }
                 });
 
-                $(".media_btn").click(function(){
-                    $(".media_btn").removeClass('active');
-                    $(this).addClass('active');
-                    vue.type = $(this).attr("media-type");
-                    if(vue.type==1){
-                        vue.type_text = "audio";
-                    }else{
-                        vue.type_text = "video";
-                    }
-                    getList();
-                })
+                
                 $(function(){
                     getList();
                 });
@@ -117,7 +102,7 @@
             if($('#title').val() != ''){
                 data.title = $('#title').val();
             }
-            $.get("http://back.kaffir-lily.cc/mediaList",
+            $.get("http://back.kaffir-lily.cc/articlesList?cate_id=3",
                     data,
                     function(data){
                         vue.list=data.data;

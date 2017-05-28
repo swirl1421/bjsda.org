@@ -383,7 +383,7 @@ Vue.filter('date_year', function (value) {
 });
 
 Vue.component('vue-navbar', {
-                    template: '<nav class="navbar navbar-default navbar-fixed-top" role="navigation">'+
+                    template: '<nav class="navbar navbar-default navbar-fixed-top vue-navbar" role="navigation">'+
         
     '<div class="container-fluid">'+
     '<div class="navbar-header">'+
@@ -392,6 +392,23 @@ Vue.component('vue-navbar', {
     '</div>'+
     '</div>'+
 '</nav>',
+                    // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
+                    // 但是我们返回给每个组件的实例的却引用了同一个data对象
+                    data: function () {
+                        return {}
+                    }
+                })
+                
+Vue.component('vue-footer', {
+                    template: '<footer class="bs-docs-footer">'+
+  '<div class="container">'+
+    '<ul class="bs-docs-footer-links">'+
+     ' <li><a href="about.html">关于本堂</a></li>'+
+    '</ul>'+
+    '<p></p>'+
+    '<p> 基督复临安息日会-北京缸瓦市堂 @2017|备案号：京ICP备16010634号</p>'+
+  '</div>'+
+'</footer>',
                     // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
                     // 但是我们返回给每个组件的实例的却引用了同一个data对象
                     data: function () {

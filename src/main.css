@@ -8,6 +8,21 @@
     background-color: #f2711c;
     border-color:#f2711c;
 }
+.bs-docs-footer{
+    background-color: #fff;
+    color: #999;
+    margin-top: 20em;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    
+}
+.bs-docs-footer a{
+    
+}
+.bs-docs-footer-links li {
+    display: inline-block;
+}
 .container-fluid{
     max-width: 980px;
     margin:auto;
