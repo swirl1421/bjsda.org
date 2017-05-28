@@ -388,7 +388,7 @@ Vue.component('vue-navbar', {
     '<div class="container-fluid">'+
     '<div class="navbar-header">'+
         '<a class="navbar-brand" href="media.html">主页</a>'+
-          '<p class="navbar-text">缸瓦市教堂的证道记录</p>'+
+          '<p class="navbar-text">北京基督复临安息日会</p>'+
     '</div>'+
     '</div>'+
 '</nav>',
