@@ -16,7 +16,6 @@
  .bs-docs-footer {
      background-color: #fff;
      color: #999;
-     margin-top: 20em;
      padding-bottom: 10px;
      padding-top: 10px;
      text-align: center;
@@ -44,6 +43,7 @@
  .content {
      margin: 70px auto;
      max-width: 980px;
+     min-height: calc(100vh);
  }
  
  .weui-cells::before {
