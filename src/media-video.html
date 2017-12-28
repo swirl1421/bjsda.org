@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" rel="stylesheet">
     <link href="https://cdn.bootcss.com/video.js/5.13.0/alt/video-js-cdn.min.css" rel="stylesheet">
     <link href="./main.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.2.1/vue.min.js"></script>
-    
+
     <script src="./dcore.js"></script>
     <link href="./font/iconfont.css" rel="stylesheet">
-     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>缸瓦市聚会视频</title>
     <style>
-      
+
     </style>
 </head>
-<body >
-     <div id="vue">
-    <vue-navbar></vue-navbar>
-    <div id="vue"style="" class="content"> 
-    <div id="big" style="margin:0px 5px 100px 5px;">
-        <!--<div class="page__hd" style="margin-bottom:10px;">
+
+<body>
+    <div id="vue">
+        <vue-navbar></vue-navbar>
+        <div style="" class="content">
+            <div id="big" style="margin:0px 5px 100px 5px;">
+                <!--<div class="page__hd" style="margin-bottom:10px;">
         <h1 class="page__title">
             缸瓦市教堂的证道视频和音频记录
         </h1>
         <p class="page__desc">缸瓦市教堂的证道视频和音频记录</p>
     </div>-->
-    <div class="weui-flex media_tab">
-        <div class="weui-flex__item">
-            <a href="javascript:;"  class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn active" media-type="1">
-                <i class="iconfont icon-yinpin"></i> 
-                {{ type==1? "音频":"视频"}}
-                </a>
-            </div>
-        
-    </div>
-        <div class="weui-cells">
+                <div class="weui-flex media_tab">
+                    <div class="weui-flex__item">
+                        <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn active" media-type="1">
+                            <i class="iconfont icon-yinpin"></i> {{ type==1? "音频":"视频"}}
+                        </a>
+                    </div>
+
+                </div>
+                <div class="weui-cells">
                     <!--<video id="my-video" class="video-js" controls preload="auto" style="max-width:980px;"
               poster="" data-setup="{}">
                <source :src="media.url" type='video/mp4'>
@@ -54,105 +55,111 @@
     <source src="http://bjsda.oss-cn-beijing.aliyuncs.com/1495294012fe936606753e52959e273a16c1f85182.mp4" type="video/mp4">
     您的浏览器不支持 video 标签。
 </video>-->
-    <div class="col-md-12 text-center">
-         <vue-video></vue-video>
-    </div>
-   
-            <a class="weui-cell " href="javascript:;" style="height:90px;">
-                <div class="weui-cell__hd"></div>
-                <div class="weui-cell__bd">
-                    
-                    
-                    <p style="color:orange;">{{ media.title }}-{{ media.speaker }}</p>
-                     
+                    <div class="col-md-12 text-center">
+                        <vue-video></vue-video>
+                    </div>
+
+                    <a class="weui-cell " href="javascript:;" style="height:90px;">
+                        <div class="weui-cell__hd"></div>
+                        <div class="weui-cell__bd">
+
+
+                            <p style="color:orange;">{{ media.title }}-{{ media.speaker }}</p>
+
+                        </div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+
                 </div>
-                <div class="weui-cell__ft"></div>
-            </a>
-          
+                <div class="col-md-12 remark" style="">
+                    <p>
+                        {{media.remark}}
+                    </p>
+                </div>
+            </div>
+
+
         </div>
-         <div class="col-md-12 remark" style="">
-           <p>
-               {{media.remark}}
-           </p>
-            </div>
     </div>
-   
-
-            </div>
-     </div>
-            <script>
-                var vue = new Vue({
-                    el:"#vue",
-                    data:{
-                        list:{},
-                        page_view:"",
-                        type:1,
-                        media:{src:""}
-                    },
-                    updated:function(){
-                        
-                        
-                    }
-                });
-
-                // $(".media_btn").click(function(){
-                //     $(".media_btn").removeClass('active');
-                //     $(this).addClass('active');
-                //     vue.type = $(this).attr("media-type");
-                //     getList();
-                // })
-                $(function(){
-                   
-                    
-                });
-                var data = { src: 0 }
-                 var id = D.getQueryString("id");
-                        $.get("http://back.kaffir-lily.cc/media/"+id,{id:id},function(result){
-                                vue.media = result.data;
-                                data = result.data;
-                                vue.type = result.data.type;
-                                document.title = result.data.title + " | 缸瓦市教堂";
-                            //     var myPlayer = videojs('my-video');
-
-                            // myPlayer.src(result.data.url);
-                            // myPlayer.load(result.data.url);
-                    });
-                    
-                Vue.component('vue-video', {
-                    template: '<video style="margin:auto;width:100%;" controls preload="none">'+
-                '<source :src="url" type="video/mp4">'+
-                '您的浏览器不支持 video 标签。'+
-            +'</video>',
-                    // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
-                    // 但是我们返回给每个组件的实例的却引用了同一个data对象
-                    data: function () {
-                        return data
-                    }
-                    })
+    <script>
+        var vue = new Vue({
+            el: "#vue",
+            data: {
+                list: {},
+                page_view: "",
+                type: 1,
+                media: {
+                    src: ""
+                }
+            },
+            updated: function() {
 
 
-            //     function getList(page){
-            // var data={};
-            // if(page==''||page==undefined) {
-            //     data.page = 1;
-            // }else{
-            //     data.page=page;
-            // }
-            // data.type = vue.type;
-            // data.size = 10;
-            // if($('#title').val() != ''){
-            //     data.title = $('#title').val();
-            // }
-            // $.get("http://127.0.0.1:8081/getMedia",
-            //         data,
-            //         function(data){
-            //             vue.list=data.data.data;
-            //             vue.page_view = D.getPageViewByBootstrap('getList',data.last_page,data.current_page,data.per_page,data.tototal);
-            //         });
-            // }
-// http://www.dawnlight.com/mediaList
-                
-            </script>
-             <!--<script src="https://cdn.bootcss.com/video.js/5.13.0/video.min.js"></script>-->
+            }
+        });
+
+        // $(".media_btn").click(function(){
+        //     $(".media_btn").removeClass('active');
+        //     $(this).addClass('active');
+        //     vue.type = $(this).attr("media-type");
+        //     getList();
+        // })
+        $(function() {
+
+
+        });
+        var data = {
+            src: 0
+        }
+        var id = D.getQueryString("id");
+        $.get("http://back.kaffir-lily.cc/media/" + id, {
+            id: id
+        }, function(result) {
+            vue.media = result.data;
+            data = result.data;
+            vue.type = result.data.type;
+            document.title = result.data.title + " | 缸瓦市教堂";
+            //     var myPlayer = videojs('my-video');
+
+            // myPlayer.src(result.data.url);
+            // myPlayer.load(result.data.url);
+        });
+
+        Vue.component('vue-video', {
+            template: '<video style="margin:auto;width:100%;" controls preload="none">' +
+                '<source :src="url" type="video/mp4">' +
+                '您的浏览器不支持 video 标签。' +
+                +'</video>',
+            // 技术上 data 的确是一个函数了，因此 Vue 不会警告，
+            // 但是我们返回给每个组件的实例的却引用了同一个data对象
+            data: function() {
+                return data
+            }
+        })
+
+
+        //     function getList(page){
+        // var data={};
+        // if(page==''||page==undefined) {
+        //     data.page = 1;
+        // }else{
+        //     data.page=page;
+        // }
+        // data.type = vue.type;
+        // data.size = 10;
+        // if($('#title').val() != ''){
+        //     data.title = $('#title').val();
+        // }
+        // $.get("http://127.0.0.1:8081/getMedia",
+        //         data,
+        //         function(data){
+        //             vue.list=data.data.data;
+        //             vue.page_view = D.getPageViewByBootstrap('getList',data.last_page,data.current_page,data.per_page,data.tototal);
+        //         });
+        // }
+        // http://www.dawnlight.com/mediaList
+    </script>
+    <!--<script src="https://cdn.bootcss.com/video.js/5.13.0/video.min.js"></script>-->
 </body>
+
 </html>
