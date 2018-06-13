@@ -16,6 +16,8 @@
     <link href="./audioplayer/audioplayer.css" rel="stylesheet">
     <script src="./audioplayer/audioplayer.js"></script>
     <script src="./dcore.js"></script>
+    <script src="https://lib.baomitu.com/fingerprintjs2/1.8.0/fingerprint2.min.js"></script>
+
     <link href="./font/iconfont.css" rel="stylesheet">
     <link href="./main.css" rel="stylesheet">
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
@@ -52,7 +54,7 @@
 
 
                             <p style="color:orange;">{{ media.title }}-{{ media.speaker }}</p>
-                            <audio :src="media.url" preload="none" />
+                            <audio :src="media.url" preload="none" @playing="playing" />
                         </div>
                         <div class="weui-cell__ft"></div>
                     </a>
@@ -75,22 +77,38 @@
                 list: {},
                 page_view: "",
                 type: 1,
+                fingerprint: '',
                 media: {},
                 is_android: true,
             },
             updated: function() {
                 $('audio').audioPlayer();
-            }
-        });
+                $(".audioplayer-playpause").click(function() {
+                    $.get("http://back.kaffir-lily.cc/setwatch/" + id + "/1", {
+                        fingerprint: vue.fingerprint
+                    }, function(data) {});
+                });
+            },
+            methods: {
+                playing: function() {
+                    console.log(1111);
 
+                },
+            },
+        });
+        new Fingerprint2().get(function(result, components) {
+            // this will use all available fingerprinting sources
+            vue.fingerprint = result;
+        });
         // $(".media_btn").click(function(){
         //     $(".media_btn").removeClass('active');
         //     $(this).addClass('active');
         //     vue.type = $(this).attr("media-type");
         //     getList();
         // })
+        var id = D.getQueryString("id");
         $(function() {
-            var id = D.getQueryString("id");
+
             $.get("http://back.kaffir-lily.cc/media/" + id, {
                 id: id
             }, function(result) {

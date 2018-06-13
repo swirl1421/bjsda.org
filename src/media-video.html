@@ -13,6 +13,7 @@
     <link href="./main.css" rel="stylesheet">
     <script src="https://web-js-or-css-source.oss-cn-beijing.aliyuncs.com/bjsda/jquery.min.js"></script>
     <script src="https://web-js-or-css-source.oss-cn-beijing.aliyuncs.com/bjsda/vue.min.js"></script>
+    <script src="https://lib.baomitu.com/fingerprintjs2/1.8.0/fingerprint2.min.js"></script>
 
 
     <script src="./dcore.js"></script>
@@ -89,6 +90,8 @@
                 list: {},
                 page_view: "",
                 type: 1,
+                is_set: false,
+                fingerprint: "",
                 media: {
                     src: ""
                 }
@@ -98,6 +101,10 @@
 
             }
         });
+        new Fingerprint2().get(function(result, components) {
+            // this will use all available fingerprinting sources
+            vue.fingerprint = result;
+        })
 
         // $(".media_btn").click(function(){
         //     $(".media_btn").removeClass('active');
@@ -106,7 +113,21 @@
         //     getList();
         // })
         $(function() {
+            function getVideoEvent() {
+                var videoes = document.getElementsByid("video1");
+                console.log(videoes);
+                for (var i = 0; i < videoes.length; i++) {
+                    showEventLog("video" + (i + 1), videoes[i]);
+                }
+            }
 
+            function showEventLog(videoNum, Media) {
+                eventTester = function(e) {
+                    Media.addEventListener(e, function() {
+                        console.log(videoNum + ":" + e);
+                    });
+                }
+            }
 
         });
         var data = {
@@ -127,7 +148,8 @@
         });
 
         Vue.component('vue-video', {
-            template: '<video style="margin:auto;width:100%;" controls preload="none">' +
+            template: '<video style="margin:auto;width:100%;" controls id="video1"' +
+                '@playing="playing" @timeupdate="load($event)" preload="none">' +
                 '<source :src="url" type="video/mp4">' +
                 '您的浏览器不支持 video 标签。' +
                 +'</video>',
@@ -135,8 +157,29 @@
             // 但是我们返回给每个组件的实例的却引用了同一个data对象
             data: function() {
                 return data
+            },
+            methods: {
+                playing: function() {
+                    $.get("http://back.kaffir-lily.cc/setwatch/" + id + "/1", {
+                        fingerprint: vue.fingerprint
+                    }, function(data) {});
+                },
+                load: function(event) {
+                    var video_time = event.currentTarget.duration;
+                    var currentTime = event.currentTarget.currentTime;
+
+                    if (currentTime > (video_time / 100 * 80) && vue.is_set === false) {
+                        $.get("http://back.kaffir-lily.cc/setwatch/" + id + "/2", {
+                            fingerprint: vue.fingerprint
+                        }, function(data) {
+                            vue.is_set = true;
+                        });
+                    }
+
+                }
             }
-        })
+        });
+
 
 
         //     function getList(page){
