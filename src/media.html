@@ -66,6 +66,18 @@
                         <div class="well well-sm">证道资源下载(百度云)</div>
 
                     </a>
+
+                    <div class="weui-cell weui-cell_vcode">
+
+                        <div class="weui-cell__bd">
+                            <input class="weui-input search-input" type="text" id="title" onkeyup="search(event)" placeholder="要查找的标题或者讲道人">
+                        </div>
+                        <div class="weui-cell__ft">
+                            <button class="weui-vcode-btn" onclick="getList()">搜索</button>
+                        </div>
+                    </div>
+
+
                     <a class="weui-cell weui-cell_access " v-bind:href="'media-'+type_text+'.html?id='+media.id" style="" v-for="(media,index) in list">
                         <div class="weui-cell__hd">
                             <img src="http://bjsda.oss-cn-beijing.aliyuncs.com/church.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" alt="" style="width:50px;margin-right:5px;display:block"></div>
@@ -94,6 +106,7 @@
                 page_view: "",
                 type: 1,
                 type_text: 'audio',
+                title: "",
             },
 
         });
@@ -113,6 +126,13 @@
         $(function() {
             getList();
         });
+
+        function search(event) {
+            var key = window.event ? event.keyCode : event.which;
+            if (key == 13) {
+                getList();
+            }
+        }
 
         function getList(page) {
             var data = {};
