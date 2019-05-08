@@ -80,7 +80,8 @@
 
                     <a class="weui-cell weui-cell_access " v-bind:href="'media-'+type_text+'.html?id='+media.id" style="" v-for="(media,index) in list">
                         <div class="weui-cell__hd">
-                            <img src="http://bjsda.oss-cn-beijing.aliyuncs.com/church.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" alt="" style="width:50px;margin-right:5px;display:block"></div>
+                            <img v-if="type==1" src="http://bjsda.oss-cn-beijing.aliyuncs.com/church.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" alt="" style="width:50px;margin-right:5px;display:block">
+                            <img v-if="type==2" src="http://bjsda.oss-cn-beijing.aliyuncs.com/church2.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" alt="" style="width:50px;margin-right:5px;display:block"></div>
                         <div class="weui-cell__bd">
 
                             <p><i class="iconfont icon-yinpin" v-if="type==1"></i> <i v-else class="iconfont icon-shipin"></i> {{ media.title }}-{{ media.speaker }}</p>
