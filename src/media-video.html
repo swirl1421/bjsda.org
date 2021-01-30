@@ -13,7 +13,6 @@
     <link href="./main.css" rel="stylesheet">
     <script src="https://web-js-or-css-source.oss-cn-beijing.aliyuncs.com/bjsda/jquery.min.js"></script>
     <script src="https://web-js-or-css-source.oss-cn-beijing.aliyuncs.com/bjsda/vue.min.js"></script>
-    <script src="https://web-js-or-css-source.oss-cn-beijing.aliyuncs.com/bjsda/fingerprint2.min.js"></script>
 
 
     <script src="./dcore.js"></script>
@@ -30,12 +29,7 @@
         <vue-navbar></vue-navbar>
         <div style="" class="content">
             <div id="big" style="margin:0px 5px 100px 5px;">
-                <!--<div class="page__hd" style="margin-bottom:10px;">
-        <h1 class="page__title">
-            缸瓦市教堂的证道视频和音频记录
-        </h1>
-        <p class="page__desc">缸瓦市教堂的证道视频和音频记录</p>
-    </div>-->
+
                 <div class="weui-flex media_tab">
                     <div class="weui-flex__item">
                         <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn active" media-type="1">
@@ -91,7 +85,7 @@
                 page_view: "",
                 type: 1,
                 is_set: false,
-                fingerprint: "",
+                fingerprint: navigator.appCodeName,
                 media: {
                     src: ""
                 }
@@ -101,17 +95,9 @@
 
             }
         });
-        new Fingerprint2().get(function(result, components) {
-            // this will use all available fingerprinting sources
-            vue.fingerprint = result;
-        })
 
-        // $(".media_btn").click(function(){
-        //     $(".media_btn").removeClass('active');
-        //     $(this).addClass('active');
-        //     vue.type = $(this).attr("media-type");
-        //     getList();
-        // })
+
+
         $(function() {
             function getVideoEvent() {
                 var videoes = document.getElementsByid("video1");
@@ -179,31 +165,7 @@
                 }
             }
         });
-
-
-
-        //     function getList(page){
-        // var data={};
-        // if(page==''||page==undefined) {
-        //     data.page = 1;
-        // }else{
-        //     data.page=page;
-        // }
-        // data.type = vue.type;
-        // data.size = 10;
-        // if($('#title').val() != ''){
-        //     data.title = $('#title').val();
-        // }
-        // $.get("http://127.0.0.1:8081/getMedia",
-        //         data,
-        //         function(data){
-        //             vue.list=data.data.data;
-        //             vue.page_view = D.getPageViewByBootstrap('getList',data.last_page,data.current_page,data.per_page,data.tototal);
-        //         });
-        // }
-        // http://www.dawnlight.com/mediaList
     </script>
-    <!--<script src="https://cdn.bootcss.com/video.js/5.13.0/video.min.js"></script>-->
 </body>
 
 </html>
