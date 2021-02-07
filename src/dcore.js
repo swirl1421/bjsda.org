@@ -1,10 +1,27 @@
 var D = {}
-
+    //获取url参数
 D.getQueryString = function(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    //修改url的get参数值
+D.changeCurrentURLArg = function(url, arg, arg_val) {
+    var pattern = arg + '=([^&]*)';
+    var replaceText = arg + '=' + arg_val;
+    if (url.match(pattern)) {
+        var tmp = '/(' + arg + '=)([^&]*)/gi';
+        tmp = url.replace(eval(tmp), replaceText);
+        url = tmp;
+    } else {
+        if (url.match('[\?]')) {
+            url = url + '&' + replaceText;
+        } else {
+            url = url + '?' + replaceText;
+        }
+    }
+    return url;
 }
 D.simplePagination = function(fun, page_num, current, size, total, btnsize = 'btn-xs') {
     if (total <= size) return '';
@@ -383,13 +400,14 @@ Vue.filter('date_year', function(value) {
     return date;
 });
 
+
 Vue.component('vue-navbar', {
-    template: '<nav class="navbar navbar-default navbar-fixed-top vue-navbar" role="navigation">' +
+    template: '<nav class="navbar navbar-default navbar-fixed-top vue-navbar" id="navbar-title" role="navigation">' +
 
         '<div class="container-fluid">' +
         '<div class="navbar-header">' +
-        '<a class="navbar-brand" href="media.html">主页</a>' +
-        '<p class="navbar-text">北京基督复临安息日会</p>' +
+        '<a class="navbar-brand" href="media.html">首页</a>' +
+        '<p class="navbar-text">北京缸瓦市基督复临安息日会</p>' +
         '</div>' +
         '</div>' +
         '</nav>',

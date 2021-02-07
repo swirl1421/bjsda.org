@@ -21,7 +21,7 @@
     <script src="./dcore.js"></script>
     <link href="./font/iconfont.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <title>北京基督复临安息日会-缸瓦市堂 </title>
+    <title>北京缸瓦市基督复临安息日会 </title>
     <style>
 
     </style>
@@ -41,7 +41,13 @@
     </div>
 </nav>-->
         <vue-navbar></vue-navbar>
+        <!-- <div class="" class="navbar navbar-fixed-top" style="z-index:1000000;background-color:#f2711c;color:#fff;float:left;position:fixed;top:0;width:100%;">
+            <div style="margin:0 auto; max-width: 980px;">
+                <a class="" style="float:left;color:#fff;margin-top:2px;" href="media.html">首页</a>
+                <p class="" style="float:left;font-size:12px;margin-top:5px;margin-left:15px;">北京基督复临安息日会-缸瓦市堂</p>
+            </div>
 
+        </div> -->
         <div class="content" style="">
             <div id="big" style="margin:0px 5px 100px 5px;">
                 <!--<div class="page__hd" style="margin-bottom:10px;">
@@ -52,20 +58,15 @@
     </div>-->
                 <div class="weui-flex media_tab">
                     <div class="weui-flex__item">
-                        <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn active" media-type="1"><i class="iconfont icon-yinpin"></i> 音频</a>
+                        <button href="javascript:;" class="weui-btn  weui-btn_plain-disabled media_btn active media-type-1" media-type="1"><i class="iconfont icon-yinpin"></i> 音频</button>
                     </div>
                     <div class="weui-flex__item">
-                        <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled media_btn" media-type="2"> <i class="iconfont icon-shipin"></i> 视频</a>
+                        <button href="javascript:;" class="weui-btn  weui-btn_plain-disabled media_btn media-type-2" media-type="2"> <i class="iconfont icon-shipin"></i> 视频</button>
                     </div>
 
                 </div>
                 <div class="weui-cells " id="list-all">
 
-                    <a class="" href="article.html?id=1">
-
-                        <div class="well well-sm">证道资源下载(百度云)</div>
-
-                    </a>
 
                     <div class="weui-cell weui-cell_vcode">
 
@@ -84,12 +85,18 @@
                             <img v-if="type==2" src="http://bjsda.oss-cn-beijing.aliyuncs.com/church2.jpg?x-oss-process=image/resize,m_fill,h_200,w_230" alt="" style="width:50px;margin-right:5px;display:block"></div>
                         <div class="weui-cell__bd">
 
-                            <p><i class="iconfont icon-yinpin" v-if="type==1"></i> <i v-else class="iconfont icon-shipin"></i> {{ media.title }}-{{ media.speaker }}</p>
-                            <p style="font-size: 13px;color: #888888;">{{ media.watch_num }}个人看过 | {{ media.make_time | date_year }}</p>
+                            <p class="media-title"><i class="iconfont icon-yinpin" v-if="type==1"></i> <i v-else class="iconfont icon-shipin"></i> {{ media.title }}-{{ media.speaker }}</p>
+                            <p class="watch">{{ media.watch_num }}个人看过 | {{ media.make_time | date_year }}</p>
                         </div>
                         <div class="weui-cell__ft"></div>
 
                     </a>
+                    <a class="" href="article.html?id=1">
+
+                        <div class="well well-sm">证道资源下载(百度云)</div>
+
+                    </a>
+
                 </div>
                 <div v-html="page_view">
 
@@ -116,16 +123,22 @@
             $(".media_btn").removeClass('active');
             $(this).addClass('active');
             vue.type = $(this).attr("media-type");
-            if (vue.type == 1) {
-                vue.type_text = "audio";
-            } else {
-                vue.type_text = "video";
-            }
 
             getList();
         })
         $(function() {
-            getList();
+            page = D.getQueryString('page');
+            if (page == null) page = 1;
+            type = D.getQueryString('type');
+            if (type) {
+                vue.type = parseInt(type);
+                if (type == 2) {
+                    $(".media_btn").removeClass('active');
+                    $(".media-type-2").addClass('active');
+                }
+            }
+
+            getList(parseInt(page));
         });
 
         function search(event) {
@@ -137,13 +150,23 @@
 
         function getList(page) {
             var data = {};
-            if (page == '' || page == undefined) {
+            if (vue.type == 1) {
+                vue.type_text = "audio";
+            } else {
+                vue.type_text = "video";
+            }
+
+            if (page == 0 || page == '' || page == undefined) {
                 data.page = 1;
             } else {
                 data.page = page;
             }
             data.type = vue.type;
             data.size = 10;
+            var url = location.href;
+            url = D.changeCurrentURLArg(url, 'page', data.page);
+            url = D.changeCurrentURLArg(url, 'type', vue.type);
+            history.pushState(null, null, url); //将网址设置
             if ($('#title').val() != '') {
                 data.title = $('#title').val();
             }
